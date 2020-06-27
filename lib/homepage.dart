@@ -101,7 +101,13 @@ void initState(){
           InfoPanel(),
           SizedBox(height: 20,),
           Center(child: Text('We ARE TOGETHER IN THE FIGHT',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
-          SizedBox(height: 50,)
+          Padding(
+              padding: const EdgeInsets.symmetric(vertical:20),
+              child: Center(
+              child: Text('Developed By Niranjani Krishnan Purushothaman',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),)
+              ),
+          ),
+          SizedBox(height: 10,),
 
         ],
       )),

@@ -2,6 +2,18 @@ import 'package:flutter/material.dart';
 
 class Search extends SearchDelegate{
 
+   @override
+ ThemeData appBarTheme(BuildContext context) {
+   final ThemeData theme = Theme.of(context);
+   return theme.copyWith(
+     primaryColor: theme.primaryColor,
+     primaryIconTheme: theme.primaryIconTheme,
+     primaryColorBrightness: theme.primaryColorBrightness,
+     primaryTextTheme: theme.primaryTextTheme,
+   );
+ }
+
+
   final List countryList;
 
   Search(this.countryList);
@@ -57,10 +69,10 @@ class Search extends SearchDelegate{
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('CONFIRMED:' + suggestionList[index]['cases'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
-                        Text('ACTIVE:' + suggestionList[index]['active'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),),
-                        Text('RECOVERED:' + suggestionList[index]['recovered'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
-                        Text('DEATHS:' + suggestionList[index]['deaths'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).brightness==Brightness.dark?Colors.grey[100]:Colors.grey[900]),),
+                        Text('CONFIRMED:' + suggestionList[index]['cases'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red,fontSize: 10),),
+                        Text('ACTIVE:' + suggestionList[index]['active'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue,fontSize: 10),),
+                        Text('RECOVERED:' + suggestionList[index]['recovered'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green,fontSize: 10),),
+                        Text('DEATHS:' + suggestionList[index]['deaths'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).brightness==Brightness.dark?Colors.grey[100]:Colors.grey[900],fontSize: 10),),
                       ],
                     ),
 

@@ -62,10 +62,10 @@ class _CountryPageState extends State<CountryPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text('CONFIRMED:' + countryData[index]['cases'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red),),
-                        Text('ACTIVE:' + countryData[index]['active'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue),),
-                        Text('RECOVERED:' + countryData[index]['recovered'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green),),
-                        Text('DEATHS:' + countryData[index]['deaths'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).brightness==Brightness.dark?Colors.grey[100]:Colors.grey),),
+                        Text('CONFIRMED:' + countryData[index]['cases'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.red,fontSize: 10,),),
+                        Text('ACTIVE:' + countryData[index]['active'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blue,fontSize: 10,),),
+                        Text('RECOVERED:' + countryData[index]['recovered'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Colors.green,fontSize: 10,),),
+                        Text('DEATHS:' + countryData[index]['deaths'].toString(),style: TextStyle(fontWeight: FontWeight.bold,color: Theme.of(context).brightness==Brightness.dark?Colors.grey[100]:Colors.grey,fontSize: 10,),),
                       ],
                     ),
 

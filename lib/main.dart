@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       data: (brightness){
         return ThemeData(
           primaryColor: primaryBlack,
-          fontFamily: 'Circular',brightness: brightness==Brightness.dark?Brightness.light:Brightness.dark,
+          fontFamily: 'Circular',brightness: brightness==Brightness.dark?Brightness.dark:Brightness.light,
           scaffoldBackgroundColor: brightness==Brightness.dark?Colors.blueGrey[900]:Colors.white,
         );
       },
