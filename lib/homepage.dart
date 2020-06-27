@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:CovidTracker/datasource.dart';
+import 'package:CovidTracker/pages/countryPage.dart';
 import 'package:CovidTracker/panels/infoPanel.dart';
 import 'package:CovidTracker/panels/mostaffectedcountries.dart';
 import 'package:CovidTracker/panels/worldwidepanel.dart';
+import 'package:dynamic_theme/dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'datasource.dart';
 import 'package:http/http.dart' as http;
@@ -24,7 +26,7 @@ fetchWorldWideData()async{
 
 List countryData;
 fetchCountryData()async{
-  http.Response response = await http.get('https://corona.lmao.ninja/v2/countries');
+  http.Response response = await http.get('https://corona.lmao.ninja/v2/countries?sort=cases');
   setState(() {
     countryData = json.decode(response.body);
   });
@@ -42,6 +44,13 @@ void initState(){
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(icon: Icon(Theme.of(context).brightness==Brightness.light?Icons.lightbulb_outline:Icons.highlight),onPressed: (){
+            DynamicTheme.of(context).setBrightness(Theme.of(context).brightness==Brightness.light?Brightness.dark:Brightness.light);
+          },)
+        ],
+
+
         centerTitle: false,
         title: Text('COVID-19 TRACKER',),
       ),
@@ -67,13 +76,18 @@ void initState(){
 
             children: <Widget>[
               Text('Worldwide',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
-              Container(
-                decoration: BoxDecoration(
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>CountryPage()));
+                },
+                  child: Container(
+                  decoration: BoxDecoration(
                   color: primaryBlack,
                   borderRadius: BorderRadius.circular(15),
-                ),
-                padding: EdgeInsets.all(10),
-                child:Text('Regional',style: TextStyle(fontSize: 16,color:Colors.white,fontWeight: FontWeight.bold),)),
+                  ),
+                  padding: EdgeInsets.all(10),
+                  child:Text('Regional',style: TextStyle(fontSize: 16,color:Colors.white,fontWeight: FontWeight.bold),)),
+              ),
               ],
             ),
           ),
