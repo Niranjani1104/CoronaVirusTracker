@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:CovidTracker/datasource.dart';
 import 'package:CovidTracker/pages/countryPage.dart';
+import 'package:CovidTracker/pages/statePage.dart';
+import 'package:CovidTracker/pages/districtpage.dart';
 import 'package:CovidTracker/panels/infoPanel.dart';
 import 'package:CovidTracker/panels/mostaffectedcountries.dart';
 import 'package:CovidTracker/panels/worldwidepanel.dart';
@@ -32,12 +34,19 @@ fetchCountryData()async{
   });
 }
 
+
 @override
 void initState(){
   fetchWorldWideData();
   fetchCountryData();
   super.initState();
 }
+
+  Future<Null> refreshList() async{
+    await http.get('https://api.covidindiatracker.com/total.json');
+    await http.get('https://api.covidindiatracker.com/state_data.json'); 
+    await http.get('https://api.covid19india.org/v2/state_district_wise.json');
+  }
 
 
   @override
@@ -73,9 +82,9 @@ void initState(){
           Padding(
           padding: const EdgeInsets.symmetric(vertical:10,horizontal: 10),
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
+            
             children: <Widget>[
-              Text('Worldwide',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold),),
+              
               GestureDetector(
                 onTap: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>CountryPage()));
@@ -88,9 +97,39 @@ void initState(){
                   padding: EdgeInsets.all(10),
                   child:Text('Regional',style: TextStyle(fontSize: 16,color:Colors.white,fontWeight: FontWeight.bold),)),
               ),
+
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>StatePage()));
+                },
+                  child: Container(
+                  decoration: BoxDecoration(
+                  color: primaryBlack,
+                  borderRadius: BorderRadius.circular(15),
+                  ),
+                  padding: EdgeInsets.all(10),
+                  child:Text('Indian States',style: TextStyle(fontSize: 16,color:Colors.white,fontWeight: FontWeight.bold),)),
+              ),
+
+              GestureDetector(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>DistrictPage()));
+                },
+                  child: Container(
+                  decoration: BoxDecoration(
+                  color: primaryBlack,
+                  borderRadius: BorderRadius.circular(15),
+                  ),
+                  padding: EdgeInsets.all(10),
+                  child:Text('Indian Districts',style: TextStyle(fontSize: 16,color:Colors.white,fontWeight: FontWeight.bold),)),
+              ),
+
+              
+
               ],
             ),
           ),
+          Center(child: Text('Worldwide',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,),),),
           worldData==null?CircularProgressIndicator():WorldwidePanel(worldData: worldData,),
           Padding(
           padding: const EdgeInsets.symmetric(vertical: 5,horizontal:10),
@@ -100,7 +139,7 @@ void initState(){
           countryData==null?Container():MostAffectedPanel(countryData: countryData,),
           InfoPanel(),
           SizedBox(height: 20,),
-          Center(child: Text('We ARE TOGETHER IN THE FIGHT',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
+          Center(child: Text('WE ARE TOGETHER IN THE FIGHT',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),)),
           Padding(
               padding: const EdgeInsets.symmetric(vertical:20),
               child: Center(
